@@ -1,5 +1,6 @@
 package com.allanperes.mentoria.cars.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,8 +11,14 @@ public class Car {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column
     private String brand;
+
+    @Column
     private Long year;
+
+    @Column
     private String color;
 
     public Long getId() {

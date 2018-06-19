@@ -21,22 +21,23 @@ public class CarController {
     }
 
     @GetMapping("/by-id/{id}")
-    public Car findById(@PathParam("id") Long id) {
+    public Car findCarById(@PathVariable("id") Long id) {
+        System.out.println(id);
         return carService.findById(id);
     }
 
     @GetMapping("/by-brand/{brand}")
-    public List<Car> findCarById(@PathParam("brand") String brand) {
+    public List<Car> findCarByBrand(@PathVariable("brand") String brand) {
         return carService.findCarByBrand(brand);
     }
 
-    @PostMapping()
-    public Car save(Car car) {
+    @PostMapping
+    public Car save(@RequestBody Car car) {
         return carService.save(car);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathParam("id") Long id) {
+    public String delete(@PathVariable("id") Long id) {
         return carService.delete(id);
     }
 }
