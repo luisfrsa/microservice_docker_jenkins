@@ -1,18 +1,25 @@
 package com.allanperes.mentoria.cars.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Car {
 
+    @Id
+    @GeneratedValue
+    private Long id;
     private String brand;
     private Long year;
-    private String collor;
+    private String color;
 
-    public Car(String brand, Long year, String collor) {
-        this.brand = brand;
-        this.year = year;
-        this.collor = collor;
+    public Long getId() {
+        return id;
     }
 
-    public Car() {
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getBrand() {
@@ -31,11 +38,11 @@ public class Car {
         this.year = year;
     }
 
-    public String getCollor() {
-        return collor;
+    public String getColor() {
+        return color;
     }
 
-    public void setCollor(String collor) {
-        this.collor = collor;
+    public void setColor(String color) {
+        this.color = color;
     }
 }
