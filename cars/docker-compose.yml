@@ -1,4 +1,4 @@
-version: "3"
+version: "3.2"
 services:
   cars:
     build: ./
@@ -6,3 +6,9 @@ services:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: dev
+    volumes:
+      - type: bind
+        source: c:/Users/allan.peres/.m2
+        target: /root/.m2
+        volume:
+          copy_on: start
