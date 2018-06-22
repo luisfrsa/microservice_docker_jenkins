@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: cars-service
+  h2:
+    console:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: true
+        format_sql: true
+    show: true
+
+server:
+  port: ${PORT:8081}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_IP:localhost}:${EUREKA_PORT:8761}/eureka/
+
+loggin:
+  level:
+    org:
+      hibernate:
+        stat: debug
+        type: trace
