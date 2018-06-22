@@ -2,16 +2,14 @@
 
 # Compiling Microservices
 
-After cloning project open folder micro-services and run the command below
-
+After cloning project open folder micro-services and run the command below:
 ...
 mvn clean install
 ...
 
 # Running microservices
 
-To run the micro-services you can just use any idea that can compile spring projects or using docker running the command below
-
+To run the micro-services you can just use any idea that can compile spring projects or using docker running the command below:
 ...
 docker-compose up --build
 ...
