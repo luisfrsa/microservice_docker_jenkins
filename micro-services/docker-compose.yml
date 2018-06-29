@@ -29,5 +29,9 @@ services:
       EUREKA_PORT: 8761
     volumes:
       - ~/.m2:/root/.m2
+  batch:
+    build: ./batch
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
 
 volumes: {}
