@@ -33,5 +33,7 @@ services:
     build: ./batch
     environment:
       SPRING_PROFILES_ACTIVE: dev
+      GATEWAY_URI: gateway
+      GATEWAY_PORT: 8080 
 
 volumes: {}

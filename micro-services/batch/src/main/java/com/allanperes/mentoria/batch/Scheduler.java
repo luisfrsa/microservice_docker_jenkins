@@ -8,7 +8,9 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Scheduler {
 
     private static final Logger log = LoggerFactory.getLogger(Scheduler.class);
@@ -19,10 +21,11 @@ public class Scheduler {
     @Autowired
     private JobLauncher jobLauncher;
 
-    @Scheduled(cron = "*/10 * * * * * ?")
+    @Scheduled(cron = "0/10 * * * * ?")
     public void execute() {
         try {
-            JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis())
+            JobParameters jobParameters = new JobParametersBuilder()
+                    .addLong("time", System.currentTimeMillis())
                     .toJobParameters();
             jobLauncher.run(job, jobParameters);
         } catch (Exception e) {

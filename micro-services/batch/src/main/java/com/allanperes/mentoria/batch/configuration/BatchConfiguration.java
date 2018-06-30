@@ -1,9 +1,6 @@
 package com.allanperes.mentoria.batch.configuration;
 
-import com.allanperes.mentoria.batch.item.Car;
-import com.allanperes.mentoria.batch.item.CarItemProcessor;
-import com.allanperes.mentoria.batch.item.CarItemReader;
-import com.allanperes.mentoria.batch.item.CarItemWriter;
+import com.allanperes.mentoria.batch.item.*;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
@@ -16,10 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
-import java.io.Reader;
 
 @Configuration
-@EnableBatchProcessing
 public class BatchConfiguration extends DefaultBatchConfigurer {
 
     @Autowired
@@ -34,29 +29,22 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
     }
 
     @Bean
-    public CarItemProcessor processor() {
-        return new CarItemProcessor();
+    public Job createCarJob() {
+        return jobBuilderFactory.get("createCarJob")
+                .preventRestart()
+                .start(step1())
+                .build();
     }
 
     @Bean
-    public Job createCarJob() {
-        return jobBuilderFactory.get("createCarJob")
-                .incrementer(new RunIdIncrementer())
-                .flow(step1())
-                .end()
-                .build();
+    public CarTasklet createTasklet() {
+        return new CarTasklet();
     }
 
     @Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
-                .<Car, Car> chunk(1)
-                .reader(new CarItemReader())
-                .processor(new CarItemProcessor())
-                .writer(new CarItemWriter())
+                .tasklet(createTasklet())
                 .build();
-
-
-
     }
 }
