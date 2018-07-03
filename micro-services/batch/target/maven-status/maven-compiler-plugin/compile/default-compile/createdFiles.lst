@@ -1,0 +1,7 @@
+com/allanperes/mentoria/batch/item/CarItemWriter.class
+com/allanperes/mentoria/batch/item/CarItemProcessor.class
+com/allanperes/mentoria/batch/item/CarItemReader.class
+com/allanperes/mentoria/batch/Scheduler.class
+com/allanperes/mentoria/batch/item/Car.class
+com/allanperes/mentoria/batch/configuration/BatchConfiguration.class
+com/allanperes/mentoria/batch/BatchApplication.class

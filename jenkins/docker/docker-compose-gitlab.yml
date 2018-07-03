@@ -1,0 +1,59 @@
+#https://developer.ibm.com/code/2017/07/13/step-step-guide-running-gitlab-ce-docker/
+#https://bee42.com/de/blog/getting-started-with-gitlab-part1/
+version: '3.1'
+services:
+  redis:
+    restart: always
+    image: sameersbn/redis:latest
+    command:
+    - --loglevel warning
+    volumes:
+    - redis-data:/var/lib/redis
+
+  postgresql:
+    restart: always
+    image: sameersbn/postgresql:9.6-2
+    volumes:
+    - pg-data:/var/lib/postgresql
+    environment:
+    - DB_USER=gitlab
+    - DB_PASS=password
+    - DB_NAME=gitlabhq_production
+    - DB_EXTENSION=pg_trgm
+
+  gitlab:
+    restart: always
+    image: sameersbn/gitlab:9.1.2
+    depends_on:
+    - redis
+    - postgresql
+    ports:
+    - "${GITLAB_HTTP_PORT}:80"
+    - "${GITLAB_SSH_PORT}:22"
+    volumes:
+    - gitlab-data:/home/git/data
+    environment:
+    - DB_ADAPTER=postgresql
+    - DB_HOST=postgresql
+    - DB_PORT=5432
+    - DB_USER=gitlab
+    - DB_PASS=password
+    - DB_NAME=gitlabhq_production
+
+    - REDIS_HOST=redis
+    - REDIS_PORT=6379
+
+    - GITLAB_HTTPS=false
+    - SSL_SELF_SIGNED=false
+
+    - GITLAB_HOST=${GITLAB_IP_ADDRESS}
+    - GITLAB_PORT=${GITLAB_HTTP_PORT}
+    - GITLAB_SSH_PORT=${GITLAB_SSH_PORT}
+    - GITLAB_SECRETS_DB_KEY_BASE=long-and-random-alphanumeric-string
+    - GITLAB_SECRETS_SECRET_KEY_BASE=long-and-random-alphanumeric-string
+    - GITLAB_SECRETS_OTP_KEY_BASE=long-and-random-alphanumeric-string
+
+volumes:
+  gitlab-data:
+  redis-data:
+  pg-data:
