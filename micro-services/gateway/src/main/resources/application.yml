@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: cars-service
+        uri: lb://cars-service
+        predicates:
+        - Path=/cars/**
+        filters:
+        - StripPrefix=1
+
+server:
+  port: ${PORT:8080}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_IP:localhost}:${EUREKA_PORT:8761}/eureka/
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
