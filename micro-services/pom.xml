@@ -12,6 +12,7 @@
 		<module>./eureka-server</module>
 		<module>./gateway</module>
 		<module>./cars</module>
+		<module>./batch</module>
 	</modules>
 	
 	<build>

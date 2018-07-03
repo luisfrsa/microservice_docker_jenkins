@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: batch
+  batch:
+    job:
+      enabled: false
+
+server:
+  port: 8082
+
+rest:
+  gateway-uri: ${GATEWAY_URI:localhost}:${GATEWAY_PORT:8080}
